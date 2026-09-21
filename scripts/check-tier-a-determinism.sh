@@ -15,7 +15,7 @@ tier_a=(
 )
 
 matches="$(
-  rg -n --glob '*.rs' '\\b(f32|f64)\\b' "${tier_a[@]}" || true
+  rg -n --glob '*.rs' '\b(f32|f64)\b' "${tier_a[@]}" || true
 )"
 
 if [[ -n "$matches" ]]; then
