@@ -101,6 +101,17 @@ jobs:
           name: fuzz-${{ matrix.target }}-${{ github.sha }}
           path: fuzz/artifacts/${{ matrix.target }}
 
+
+  # Tier A consensus code must not use floating-point types. Keep this check
+  # as a small auditable source scan rather than adding a dependency-heavy
+  # static-analysis framework.
+  tier-a-determinism:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Tier-A determinism rules
+        run: bash scripts/check-tier-a-determinism.sh
+
   deny:
     runs-on: ubuntu-latest
     steps:
